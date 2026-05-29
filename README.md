@@ -10,6 +10,29 @@
 - ✅ 极速模式：2秒内完成审核操作
 - ✅ 批量审核（用户明确说"全部通过"时）
 
+## 🔧 环境要求
+
+### 必需条件
+
+| 要求 | 说明 | 检查命令 |
+|------|------|----------|
+| Python 3.6+ | 脚本运行环境 | `python3 --version` |
+| 网络访问 | 能访问 op.haidianyun.com | `curl -sk https://op.haidianyun.com` |
+| Hermes Agent | 技能加载框架 | `hermes --version` |
+
+### 依赖说明
+
+**无额外依赖** — 脚本仅使用 Python 标准库，无需安装任何第三方包。
+
+**不需要浏览器** — 纯 API 调用，无需 Selenium、Puppeteer 或 Chromium。
+
+### 环境变量
+
+| 变量名 | 说明 | 必填 |
+|--------|------|------|
+| `HAIDIANYUN_USER_ACCOUNT` | 海典运营平台账号 | ✅ |
+| `HAIDIANYUN_PASSWORD` | 海典运营平台密码 | ✅ |
+
 ## 🚀 快速开始
 
 ### 方式一：通过 Hermes Agent 安装（推荐）
@@ -29,6 +52,14 @@ git clone https://github.com/oldxianyu/haidianyun-customer-audit.git \
 hermes gateway restart
 ```
 
+### 环境检查
+
+安装后运行环境检查脚本：
+
+```bash
+python3 ~/.hermes/skills/business/haidianyun-customer-audit/scripts/check_environment.py
+```
+
 ## ⚙️ 配置
 
 ### 1. 设置环境变量
@@ -38,10 +69,7 @@ hermes gateway restart
 ```bash
 # 海典运营平台账号密码
 HAIDIANYUN_USER_ACCOUNT=your_account
-HAIDIANYUN_PASSWORD=your_password
-```
-
-### 2. 重启 Hermes Agent
+HAIDIANYUN_PASSWORD=your_p...## 2. 重启 Hermes Agent
 
 ```bash
 hermes gateway restart
@@ -183,7 +211,8 @@ haidianyun-customer-audit/
 ├── README.md                   # 本说明文档
 ├── .gitignore                  # Git 忽略规则
 ├── scripts/
-│   └── haidianyun_audit.py     # 快速审核脚本
+│   ├── haidianyun_audit.py     # 快速审核脚本
+│   └── check_environment.py    # 环境检查脚本
 └── references/                 # 参考文档
     ├── api-details.md          # API 详细文档
     ├── wecom-websocket-stability.md  # WebSocket 稳定性说明
@@ -255,14 +284,7 @@ cd ~/.hermes/skills/business/haidianyun-customer-audit
 python3 scripts/haidianyun_audit.py 21322
 ```
 
-## 📄 环境变量
-
-| 变量名 | 说明 | 必填 | 默认值 |
-|--------|------|------|--------|
-| `HAIDIANYUN_USER_ACCOUNT` | 海典运营平台账号 | ✅ | - |
-| `HAIDIANYUN_PASSWORD` | 海典运营平台密码 | ✅ | - |
-
-## 📝 更新日志
+## 📄 更新日志
 
 ### v1.0.0 (2026-05-29)
 - 初始版本
@@ -270,6 +292,7 @@ python3 scripts/haidianyun_audit.py 21322
 - 支持按 ID 和名称审核
 - 支持图片识别审核
 - 极速模式优化（2秒内完成）
+- 环境检查脚本
 
 ## 🤝 贡献
 
