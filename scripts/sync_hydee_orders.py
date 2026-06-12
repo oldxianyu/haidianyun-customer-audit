@@ -19,6 +19,7 @@ API_BASE = "https://middle.hydee.cn/businesses-gateway/operate/1.0"
 ACCOUNT = "zangbangyu"
 PASSWORD = "18663561336"
 PAGE_SIZE = 100
+TARGET_BEDEPT = "east-china"  # 只同步此事业部，None=全部
 
 DB_CONFIG = {
     "host": "localhost",
@@ -192,6 +193,12 @@ def main():
     print("拉取全部套餐记录...", flush=True)
     records = fetch_all(token)
     print(f"拉取完成，共 {len(records)} 条", flush=True)
+
+    # 按事业部过滤
+    if TARGET_BEDEPT:
+        before = len(records)
+        records = [r for r in records if r.get("bedept") == TARGET_BEDEPT]
+        print(f"过滤 {TARGET_BEDEPT}: {len(records)}/{before} 条", flush=True)
 
     print("写入 PostgreSQL...", flush=True)
     conn = get_conn()
